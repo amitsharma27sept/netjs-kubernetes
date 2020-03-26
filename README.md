@@ -9,21 +9,21 @@
   https://docs.docker.com/docker-for-windows/
 
 - Create Docker file on path where your package.json file is:
-```
-FROM node:12 AS builder
-WORKDIR /app
-COPY ./package.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+  ```
+  FROM node:12 AS builder
+  WORKDIR /app
+  COPY ./package.json ./
+  RUN npm install
+  COPY . .
+  RUN npm run build
 
 
-FROM node:12-alpine
-WORKDIR /app
-COPY --from=builder /app ./
-EXPOSE 3000
-CMD ["npm", "run", "start:prod"]
-```
+  FROM node:12-alpine
+  WORKDIR /app
+  COPY --from=builder /app ./
+  EXPOSE 3000
+  CMD ["npm", "run", "start:prod"]
+  ```
 
 - Install Kubectl
   ```
@@ -34,7 +34,7 @@ CMD ["npm", "run", "start:prod"]
   choco install minikube
   ```
 - Create a file named prodapp.deployment.yml
-  ```
+
 - Start Minikube
   ```
   minikube start
